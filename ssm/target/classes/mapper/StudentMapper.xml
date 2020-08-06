@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.dao.StudentMapper">
+
+		<select id="findList" parameterType="StudentVo" resultType="StudentVo"> 
+		
+		SELECT s.*,m.`m_name` AS mname FROM stu_tb s,major_tb m 
+		
+		<where>
+		
+		 s.`m_id`=m.`m_id`
+		<if test="sName!=null and sName!=''">
+		and s.s_name like '%${sName}%'
+		</if>
+		<if test="sBirth1!=null">
+		and s.s_birth &gt;= #{sBirth1}
+		</if>
+		<if test="sBirth2!=null">
+		and s.s_birth &lt;= #{sBirth2}
+		</if>
+		<if test="mId!=null and mId!=''">
+		and s.m_id = #{mId}
+		</if>
+		
+		</where>
+		
+		
+		 </select>
+
+  </mapper>
